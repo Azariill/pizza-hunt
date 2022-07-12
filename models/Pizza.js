@@ -1,15 +1,19 @@
 /** @format */
 
-const { Schema, model } = require("mongoose");
+const { Schema, model, trusted } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
 const PizzaSchema = new Schema(
   {
     pizzaName: {
       type: String,
+      require: true,
+      trim: trusted
     },
     createdBy: {
       type: String,
+      required: true,
+      trim: true
     },
     createdAt: {
       type: Date,
@@ -19,6 +23,7 @@ const PizzaSchema = new Schema(
     size: {
       type: String,
       default: "Large",
+      enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large']
     },
     toppings: [],
     comments: [
